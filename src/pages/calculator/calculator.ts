@@ -14,10 +14,13 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'calculator.html',
 })
 export class CalculatorPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  height: number;
+  weight: number;
+  constructor(public navCtrl: NavController, public navParams: NavParams) {    
   }
-
+  calculateBMI() {
+    
+  }
   ionViewDidLoad() {
     console.log('ionViewDidLoad CalculatorPage');
   }

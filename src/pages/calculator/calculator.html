@@ -14,5 +14,19 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item>
+      <ion-label floating>Weight (kg)</ion-label>
+      <ion-input type="number" [(ngModel)]="weight"></ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label floating>Height (cm)</ion-label>
+      <ion-input type="number" [(ngModel)]="height"></ion-input>
+    </ion-item>
+  </ion-list>
+  
+  <div padding>
+    <button block ion-button (click)="calculateBMI()">Calculate</button>
+  </div>
 </ion-content>
