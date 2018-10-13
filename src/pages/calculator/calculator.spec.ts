@@ -19,7 +19,8 @@ describe("CalculatorPage", () => {
         { provide: StatusBar, useFactory: () => StatusBarMock.instance() },
         { provide: SplashScreen, useFactory: () => SplashScreenMock.instance() },
         { provide: NavController, useFactory: () => NavControllerMock.instance() },
-        { provide: NavParams, useFactory: () => NavParamsMock.instance() }
+        { provide: NavParams, useFactory: () => NavParamsMock.instance() },
+        CalculatorPage
       ]
     }).compileComponents();
   }));
@@ -66,6 +67,18 @@ describe("CalculatorPage", () => {
     expect(calculatorpage.getBmiMessage).toEqual('Overweight');
     expect(calculatorpage.calculateBMI()).toHaveBeenCalled;
   })
+
+  it("calculate function should call setBMIMessage function", inject(
+    [CalculatorPage], calculator => {
+      calculator.height = 180;
+      calculator.weight = 90;
+      spyOn(calculator, "calculateBMI").and.returnValue('Overweight');
+       
+      calculator.calculateBMI();
+  
+      expect(calculator.calculateBMI).toHaveBeenCalled();      
+    }
+  ));
 
 
 });
