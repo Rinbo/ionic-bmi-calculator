@@ -80,5 +80,44 @@ describe("CalculatorPage", () => {
     }
   ));
 
+  it('should calculate BMI', () => {
+    spyOn(calculatorpage, 'setBMIMessage')
+    calculatorpage.weight = 92;
+    calculatorpage.height = 180;
+    calculatorpage.calculateBMI();
+
+    expect(calculatorpage.bmiValue).toEqual(28.4);
+    expect(calculatorpage.setBMIMessage).toHaveBeenCalled
+  });
+
+  it('should display Underweight if bmiValue is under 18.5', () => {
+    calculatorpage.bmiValue = 18;
+    calculatorpage.setBMIMessage();
+
+    expect(calculatorpage.bmiMessage).toEqual('Underweight')
+  });
+
+  it('should display Normal if bmiValue is under between 18.5 and 25', () => {
+    calculatorpage.bmiValue = 23;
+    calculatorpage.setBMIMessage();
+
+    expect(calculatorpage.bmiMessage).toEqual('Normal')
+  });
+
+  it('should display Overweight if bmiValue is under between 25 and 30', () => {
+    calculatorpage.bmiValue = 28;
+    calculatorpage.setBMIMessage();
+
+    expect(calculatorpage.bmiMessage).toEqual('Overweight')
+  });
+
+  it('should display Obese if bmiValue is above 30', () => {
+    calculatorpage.bmiValue = 33;
+    calculatorpage.setBMIMessage();
+
+    expect(calculatorpage.bmiMessage).toEqual('Obese')
+  });
+
+
 
 });
