@@ -12,7 +12,15 @@ export class CalculatorPage {
   bmiValue: number;
   bmiMessage: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {    
+  get getHeight() { return this.height};
+  set setHeight( value ) {this.height = value};
+  get getWeight() { return this.weight};
+  set setWeight( value ) {this.weight = value};
+  get getBmiMessage() {return this.bmiMessage};
+
+  constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.height = 180;
+    this.weight = 90;    
   }
 
   calculateBMI() {

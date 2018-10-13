@@ -26,7 +26,7 @@ describe("CalculatorPage", () => {
 
   beforeEach(() => {
     let fixture = TestBed.createComponent(CalculatorPage);
-    calculatorpage = fixture.componentInstance;
+    calculatorpage = fixture.componentInstance;        
   });
 
   it("should create the calculator page", () => {
@@ -42,21 +42,30 @@ describe("CalculatorPage", () => {
     expect(NavController).toBeTruthy();
   });
 
-  it("Should fill in weight and height"), () => {
-    calculatorpage.height = 180;
-    calculatorpage.weight = 90;
-    expect(calculatorpage.height).toBeDefined;
-  }
-
-  it("should have calculate funciton"), () => {
+  it("should have calculate funciton", () => {
     spyOn(calculatorpage, 'calculateBMI');
+    const heightSpy = spyOnProperty(calculatorpage, 'setHeight', 'set');
+    const weightSpy = spyOnProperty(calculatorpage, 'setWeight', 'set');
+    const bmiSpy = spyOnProperty(calculatorpage, 'getBmiMessage').and.returnValue('Overweight');
     calculatorpage.height = 180;
     calculatorpage.weight = 90;
     calculatorpage.calculateBMI()
-
+    expect(calculatorpage.getHeight).toBe(180)
+    expect(heightSpy).toHaveBeenCalled;
+    expect(calculatorpage.getWeight).toBe(90)
+    expect(weightSpy).toHaveBeenCalled;
     expect(calculatorpage.calculateBMI).toHaveBeenCalled();
-    expect(calculatorpage.bmiMessage).toEqual('Overweight')
-  }
+    expect(calculatorpage.getBmiMessage).toEqual('Overweight')
+    expect(bmiSpy).toHaveBeenCalled;
+  });
+
+  it('should calculate BMI', () => {
+    spyOn(calculatorpage, 'calculateBMI');
+    spyOnProperty(calculatorpage, 'getBmiMessage').and.returnValue('Overweight');
+    calculatorpage.calculateBMI();
+    expect(calculatorpage.getBmiMessage).toEqual('Overweight');
+    expect(calculatorpage.calculateBMI()).toHaveBeenCalled;
+  })
 
 
 });
